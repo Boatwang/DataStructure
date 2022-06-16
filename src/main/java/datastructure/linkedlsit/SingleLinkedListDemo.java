@@ -3,6 +3,10 @@ package main.java.datastructure.linkedlsit;
 /**
  *
  * 单链表
+ * 优点：单向链表增加删除节点简单。遍历时候不会死循环；
+ * 缺点：- 只能从头到尾遍历。只能找到后继，无法找到前驱，也就是只能前进。
+ *      - 需要靠辅助删除,不能自我删除
+ *
  */
 
 public class SingleLinkedListDemo {
