@@ -5,6 +5,8 @@ package main.java.datastructure.Stack;
  */
 
 public class Stack {
+    public static void main(String[] args) {
+    }
 }
 
 class ArrayStack{
