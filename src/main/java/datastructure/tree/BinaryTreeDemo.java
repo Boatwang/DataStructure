@@ -45,6 +45,17 @@ public class BinaryTreeDemo {
         System.out.println("中序遍历");
         binaryTree.infixOrder();
 
+        System.out.println("前序遍历查找数据");
+        HeroNode resNode1 = binaryTree.postOrderSearch(5);
+        System.out.println(resNode1);
+
+        System.out.println("中序遍历查找数据");
+        HeroNode resNode2 = binaryTree.postOrderSearch(5);
+        System.out.println(resNode2);
+
+        System.out.println("后序遍历查找数据");
+        HeroNode resNode3 = binaryTree.postOrderSearch(5);
+        System.out.println(resNode3);
 
     }
 
@@ -57,6 +68,9 @@ class BinaryTree{
         this.root=root;
     }
 
+    /**
+     * 前序遍历
+     */
     public void preOrder(){
         if (this.root!=null){
             this.root.preOrder();
@@ -65,6 +79,9 @@ class BinaryTree{
         }
     }
 
+    /**
+     * 中序遍历
+     */
     public void infixOrder(){
         if (this.root!=null){
             this.root.infixOrder();
@@ -73,6 +90,9 @@ class BinaryTree{
         }
     }
 
+    /**
+     * 后序遍历
+     */
     public void postOrder(){
         if (this.root!=null){
             this.root.postOrder();
@@ -80,6 +100,72 @@ class BinaryTree{
             System.out.println("空二叉树，无数据");
         }
     }
+
+    /**
+     * 前序遍历查找数据
+     * @param no
+     * @return
+     */
+    public HeroNode preOrderSearch(int no){
+        HeroNode resNode = null;
+        if (this.root!=null){
+            resNode = this.root.preOrderSearch(no);
+            if (resNode==null){
+                System.out.println("没有查找到该数据,该数据不在表中");
+                return null;
+            }else {
+                return resNode;
+            }
+        }else {
+            System.out.println("空二叉树，无数据");
+            return null;
+        }
+    }
+
+    /**
+     * 中序查找
+     * @param no
+     * @return
+     */
+    public HeroNode infixOrderSearch(int no){
+        HeroNode resNode = null;
+        if (this.root!=null){
+            resNode = this.root.infixOrderSearch(no);
+            if (resNode==null){
+                System.out.println("没有查找到该数据,该数据不在表中");
+                return null;
+            }else {
+                return resNode;
+            }
+        }else {
+            System.out.println("空二叉树，无数据");
+            return null;
+        }
+    }
+
+
+    /**
+     * 后序遍历查找
+     * @param no
+     * @return
+     */
+    public HeroNode postOrderSearch(int no){
+        HeroNode resNode = null;
+        if (this.root!=null){
+            resNode = this.root.postOrderSearch(no);
+            if (resNode==null){
+                System.out.println("没有查找到该数据,该数据不在表中");
+                return null;
+            }else {
+                return resNode;
+            }
+        }else {
+            System.out.println("空二叉树，无数据");
+            return null;
+        }
+    }
+
+
 }
 
 class HeroNode {
@@ -133,7 +219,6 @@ class HeroNode {
         this.name = name;
     }
 
-
     /**
      * 前序遍历
      */
@@ -174,6 +259,71 @@ class HeroNode {
             this.right.postOrder();
         }
         System.out.println(this);
+    }
+
+    /**
+     *前序查找
+     */
+    public HeroNode preOrderSearch(int no){
+        if (this.no == no){
+            return this;
+        }
+        HeroNode resNode = null;
+        if (this.left!=null){
+            resNode = this.left.preOrderSearch(no);
+        }
+        if (resNode!=null){
+            return resNode;
+        }
+        if (this.right!= null){
+            resNode = this.right.preOrderSearch(no);
+        }
+        return resNode;
+
+    }
+
+    /**
+     * 中序查找
+     */
+    public HeroNode infixOrderSearch(int no){
+        HeroNode resNode = null;
+        if (this.left!=null){
+            resNode = this.left.infixOrderSearch(no);
+        }
+        if (resNode!=null){
+            return resNode;
+        }
+        if (this.no==no){
+            return this;
+        }
+        if (this.right!=null){
+            resNode = this.right.infixOrderSearch(no);
+        }
+        return resNode;
+
+    }
+
+    /**
+     * 后续查找
+     */
+    public HeroNode postOrderSearch(int no){
+        HeroNode resNode = null;
+        if (this.left!=null){
+            resNode = this.left.postOrderSearch(no);
+        }
+        if (resNode!=null){
+            return resNode;
+        }
+        if (this.right!=null){
+            resNode = this.right.postOrderSearch(no);
+        }
+        if (resNode!=null){
+            return resNode;
+        }
+        if (this.no==no){
+            return this;
+        }
+        return resNode;
     }
 
 }
