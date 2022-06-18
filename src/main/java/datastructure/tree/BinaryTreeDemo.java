@@ -57,24 +57,28 @@ public class BinaryTreeDemo {
         HeroNode resNode3 = binaryTree.postOrderSearch(5);
         System.out.println(resNode3);
 
+        System.out.println("根据no删除节点");
+        binaryTree.delNode(0);
+        binaryTree.infixOrder();
+
     }
 
 }
 
-class BinaryTree{
+class BinaryTree {
     private HeroNode root;
 
-    public void setRoot(HeroNode root){
-        this.root=root;
+    public void setRoot(HeroNode root) {
+        this.root = root;
     }
 
     /**
      * 前序遍历
      */
-    public void preOrder(){
-        if (this.root!=null){
+    public void preOrder() {
+        if (this.root != null) {
             this.root.preOrder();
-        }else {
+        } else {
             System.out.println("空二叉树，无数据");
         }
     }
@@ -82,10 +86,10 @@ class BinaryTree{
     /**
      * 中序遍历
      */
-    public void infixOrder(){
-        if (this.root!=null){
+    public void infixOrder() {
+        if (this.root != null) {
             this.root.infixOrder();
-        }else {
+        } else {
             System.out.println("空二叉树，无数据");
         }
     }
@@ -93,30 +97,31 @@ class BinaryTree{
     /**
      * 后序遍历
      */
-    public void postOrder(){
-        if (this.root!=null){
+    public void postOrder() {
+        if (this.root != null) {
             this.root.postOrder();
-        }else {
+        } else {
             System.out.println("空二叉树，无数据");
         }
     }
 
     /**
      * 前序遍历查找数据
+     *
      * @param no
      * @return
      */
-    public HeroNode preOrderSearch(int no){
+    public HeroNode preOrderSearch(int no) {
         HeroNode resNode = null;
-        if (this.root!=null){
+        if (this.root != null) {
             resNode = this.root.preOrderSearch(no);
-            if (resNode==null){
+            if (resNode == null) {
                 System.out.println("没有查找到该数据,该数据不在表中");
                 return null;
-            }else {
+            } else {
                 return resNode;
             }
-        }else {
+        } else {
             System.out.println("空二叉树，无数据");
             return null;
         }
@@ -124,20 +129,21 @@ class BinaryTree{
 
     /**
      * 中序查找
+     *
      * @param no
      * @return
      */
-    public HeroNode infixOrderSearch(int no){
+    public HeroNode infixOrderSearch(int no) {
         HeroNode resNode = null;
-        if (this.root!=null){
+        if (this.root != null) {
             resNode = this.root.infixOrderSearch(no);
-            if (resNode==null){
+            if (resNode == null) {
                 System.out.println("没有查找到该数据,该数据不在表中");
                 return null;
-            }else {
+            } else {
                 return resNode;
             }
-        }else {
+        } else {
             System.out.println("空二叉树，无数据");
             return null;
         }
@@ -146,22 +152,40 @@ class BinaryTree{
 
     /**
      * 后序遍历查找
+     *
      * @param no
      * @return
      */
-    public HeroNode postOrderSearch(int no){
+    public HeroNode postOrderSearch(int no) {
         HeroNode resNode = null;
-        if (this.root!=null){
+        if (this.root != null) {
             resNode = this.root.postOrderSearch(no);
-            if (resNode==null){
+            if (resNode == null) {
                 System.out.println("没有查找到该数据,该数据不在表中");
                 return null;
-            }else {
+            } else {
                 return resNode;
             }
-        }else {
+        } else {
             System.out.println("空二叉树，无数据");
             return null;
+        }
+    }
+
+    /**
+     * 递归删除节点
+     * 若删除的节点是叶子节点,则删除该节点
+     * 若删除的节点但是非叶子节点,则删除该子树
+     */
+    public void delNode(int no){
+        if (this.root!=null){
+            if (this.root.getNo()==no){
+                this.root = null;
+            }else {
+                this.root.delNode(no);
+            }
+        }else {
+            System.out.println("空树，无法进行该操作");
         }
     }
 
@@ -262,20 +286,20 @@ class HeroNode {
     }
 
     /**
-     *前序查找
+     * 前序查找
      */
-    public HeroNode preOrderSearch(int no){
-        if (this.no == no){
+    public HeroNode preOrderSearch(int no) {
+        if (this.no == no) {
             return this;
         }
         HeroNode resNode = null;
-        if (this.left!=null){
+        if (this.left != null) {
             resNode = this.left.preOrderSearch(no);
         }
-        if (resNode!=null){
+        if (resNode != null) {
             return resNode;
         }
-        if (this.right!= null){
+        if (this.right != null) {
             resNode = this.right.preOrderSearch(no);
         }
         return resNode;
@@ -285,18 +309,18 @@ class HeroNode {
     /**
      * 中序查找
      */
-    public HeroNode infixOrderSearch(int no){
+    public HeroNode infixOrderSearch(int no) {
         HeroNode resNode = null;
-        if (this.left!=null){
+        if (this.left != null) {
             resNode = this.left.infixOrderSearch(no);
         }
-        if (resNode!=null){
+        if (resNode != null) {
             return resNode;
         }
-        if (this.no==no){
+        if (this.no == no) {
             return this;
         }
-        if (this.right!=null){
+        if (this.right != null) {
             resNode = this.right.infixOrderSearch(no);
         }
         return resNode;
@@ -306,24 +330,46 @@ class HeroNode {
     /**
      * 后续查找
      */
-    public HeroNode postOrderSearch(int no){
+    public HeroNode postOrderSearch(int no) {
         HeroNode resNode = null;
-        if (this.left!=null){
+        if (this.left != null) {
             resNode = this.left.postOrderSearch(no);
         }
-        if (resNode!=null){
+        if (resNode != null) {
             return resNode;
         }
-        if (this.right!=null){
+        if (this.right != null) {
             resNode = this.right.postOrderSearch(no);
         }
-        if (resNode!=null){
+        if (resNode != null) {
             return resNode;
         }
-        if (this.no==no){
+        if (this.no == no) {
             return this;
         }
         return resNode;
+    }
+
+    /**
+     * 递归删除节点
+     * 是叶子节点就直接删除
+     * 不是叶子节点就删除子树
+     */
+    public void delNode(int no){
+        if (this.left!=null && this.left.no==no){
+            this.left=null;
+            return;
+        }
+        if (this.right!=null && this.right.no==no){
+            this.right=null;
+            return;
+        }
+        if (this.left!=null && this.left.no!=no){
+            this.left.delNode(no);
+        }
+        if (this.right!=null && this.right.no!=no){
+            this.right.delNode(no);
+        }
     }
 
 }
